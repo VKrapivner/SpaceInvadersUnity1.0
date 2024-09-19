@@ -7,10 +7,11 @@ public class Projectile : MonoBehaviour
 {
     public float moveSpeed;
     public GameObject explosionPrefab;
+    private ScoreManager scoreManager;
 
     void Start()
     {
-        
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
 
     void Update()
@@ -24,6 +25,7 @@ public class Projectile : MonoBehaviour
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);//What are you spanning in, where, rotation
             Destroy(collision.gameObject);//destroying the object it collides with
+            scoreManager.UpdateScore(50);
             Destroy(gameObject);//destroying the projectile
         }
 
